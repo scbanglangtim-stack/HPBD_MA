@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Chúc Mừng Sinh Nhật Võ Nguyễn Minh Anh | 26.10 ✨</title>
+  
+  <!-- SEO & Social Meta Tags for Sharing -->
+  <meta name="description" content="Một món quà sinh nhật đặc biệt và đong đầy yêu thương gửi tặng Võ Nguyễn Minh Anh nhân ngày 26/10 ✨">
+  <meta property="og:title" content="Happy Birthday Võ Nguyễn Minh Anh | 26.10 ✨">
+  <meta property="og:description" content="Chạm vào đây để cùng mở hộp quà sinh nhật bất ngờ và gửi những lời chúc ngọt ngào nhất!">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#201035">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Starfield Canvas -->
+  <canvas id="star-canvas"></canvas>
+
+  <!-- Top Floating Controls -->
+  <div class="floating-bar">
+    <button class="pill-btn icon-only" id="firework-btn" title="Bắn pháo hoa ăn mừng">
+      🎆
+    </button>
+    <button class="pill-btn" onclick="document.getElementById('memory-timeline-section').scrollIntoView({behavior:'smooth'})" title="Xem hành trình kỷ niệm">
+      📸 Kỷ Niệm
+    </button>
+    <button class="pill-btn" id="share-btn" title="Chia sẻ trang web">
+      🔗 Chia Sẻ
+    </button>
+  </div>
+
+  <!-- ==========================================================================
+       STAGE 0: UNBOXING GIFT MODAL OVERLAY (LUXURY GIFT BOX)
+       ========================================================================== -->
+  <div class="gift-modal-overlay" id="gift-modal-overlay">
+    <div class="gift-sparkles"></div>
+    <div class="gift-intro-tag">✨ SPECIAL SURPRISE FOR YOU ✨</div>
+    <div class="crown-icon-glow">👑</div>
+    <h2 class="gift-overlay-sub">
+      Món Quà Sinh Nhật Độc Quyền Dành Tặng
+    </h2>
+    <div class="gift-name-wrapper">
+      <div class="name-sparkle-deco">✧ ──────── ⋆ 💖 ⋆ ──────── ✧</div>
+      <h1 class="dynamic-name gift-luxury-name">
+        Võ Nguyễn Minh Anh
+      </h1>
+      <div class="name-sparkle-deco">✧ ──────── ⋆ 🎂 ⋆ ──────── ✧</div>
+    </div>
+    <p class="gift-date-label">
+      Khoảnh khắc thiêng liêng ngày <strong class="dynamic-date">26 Tháng 10</strong>
+    </p>
+
+    <!-- 3D Luxury Gift Box -->
+    <div class="gift-box-container" id="gift-box-container" title="Bấm vào để mở hộp quà bất ngờ!">
+      <div class="gift-box">
+        <div class="gift-bow">
+          <div class="bow-left"></div>
+          <div class="bow-right"></div>
+          <div class="bow-center-knot"></div>
+        </div>
+        <div class="gift-lid">
+          <div class="gift-ribbon-vertical"></div>
+        </div>
+        <div class="gift-body">
+          <div class="gift-ribbon-vertical"></div>
+          <div class="gift-ribbon-horizontal"></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="open-gift-btn" id="open-gift-btn">
+      <span>🎁</span> Chạm Để Mở Quà
+    </button>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 15px; letter-spacing: 0.5px;">
+      (Chạm vào hộp quà để bắt đầu khoảnh khắc diệu kỳ)
+    </p>
+  </div>
+
+  <!-- ==========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================== -->
+  <main class="main-container">
+    
+    <!-- Hero Banner (Luxury Greeting) -->
+    <section class="hero-section">
+      <div class="royal-crown">👑</div>
+      <div class="date-badge">
+        <span>🌟</span> NGÀY 26 THÁNG 10 • HAPPY BIRTHDAY <span>🌟</span>
+      </div>
+      <h2 class="hero-title">Happy Birthday</h2>
+      <div class="hero-name-container">
+        <div class="hero-deco-line">✧ ─── ⋆ 💖 ⋆ ─── ✧</div>
+        <h1 class="hero-name dynamic-name">Võ Nguyễn Minh Anh</h1>
+        <div class="hero-deco-line">✧ ─── ⋆ 🎂 ⋆ ─── ✧</div>
+      </div>
+
+      <div class="hero-highlights-row">
+        <div class="highlight-badge">🌸 Tuổi Mới Rực Rỡ</div>
+        <div class="highlight-badge">✨ Vạn Sự Như Ý</div>
+        <div class="highlight-badge">💖 Ngập Tràn Yêu Thương</div>
+      </div>
+
+      <p class="hero-subtitle">
+        Chúc em yêu một tuổi mới luôn xinh đẹp tựa ánh ban mai, nụ cười luôn nở trên môi, mỗi ngày trôi qua đều là một trang ngập tràn hạnh phúc và may mắn!
+      </p>
+    </section>
+
+    <!-- Interactive Birthday Cake & Candles -->
+    <section class="cake-section">
+      <div class="cake-glow-ambient"></div>
+      <div class="cake-wrapper">
+        <!-- 3 Candles Group -->
+        <div class="candles-group">
+          <div class="candle candle-1" title="Chạm để thổi nến">
+            <div class="candle-wick"></div>
+            <div class="flame"></div>
+            <div class="smoke"></div>
+          </div>
+          <div class="candle candle-2" title="Chạm để thổi nến">
+            <div class="candle-wick"></div>
+            <div class="flame"></div>
+            <div class="smoke"></div>
+          </div>
+          <div class="candle candle-3" title="Chạm để thổi nến">
+            <div class="candle-wick"></div>
+            <div class="flame"></div>
+            <div class="smoke"></div>
+          </div>
+        </div>
+
+        <!-- 3-Tier Luxury Royal Cake -->
+        <div class="cake-tier tier-top">
+          <div class="frosting-drips"></div>
+          <div class="cake-decoration">
+            <div class="berry"></div>
+            <div class="berry gold-pearl"></div>
+            <div class="berry"></div>
+          </div>
+        </div>
+
+        <div class="cake-tier tier-mid">
+          <div class="frosting-drips"></div>
+          <div class="cake-decoration">
+            <div class="berry gold-pearl"></div>
+            <div class="berry"></div>
+            <div class="berry gold-pearl"></div>
+          </div>
+        </div>
+
+        <div class="cake-tier tier-bottom">
+          <div class="frosting-drips"></div>
+          <div class="cake-decoration">
+            <div class="berry"></div>
+            <div class="berry gold-pearl"></div>
+            <div class="berry"></div>
+            <div class="berry gold-pearl"></div>
+          </div>
+        </div>
+
+        <!-- Luxury Cake Plate -->
+        <div class="cake-plate"></div>
+      </div>
+
+    <div class="cake-action-container">
+      <button class="blow-candle-btn" id="blow-candle-btn">
+        <span>🎂</span> Nhấn để thổi nến & ước một điều ước!
+      </button>
+      <div class="wish-unlocked-message" id="wish-unlocked-message">
+        <div class="wish-scroll-card">
+          <div class="wish-scroll-icon">✨ 🌟 ✨</div>
+          <div class="wish-scroll-title">Ước Nguyện Đã Bay Lên Bầu Trời Đầy Sao!</div>
+          <p class="wish-scroll-desc">
+            Chúc <strong>em yêu</strong> tuổi mới luôn rực rỡ như ánh sao đêm, luôn bình an, hạnh phúc và vạn sự đều nở hoa như ý nguyện!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wishes Cards Grid -->
+  <section>
+    <div class="section-heading">
+      <div class="section-tag">DÀNH TẶNG EM YÊU</div>
+      <h2 class="section-title">Những Lời Chúc Ngọt Ngào Nhất</h2>
+    </div>
+
+    <div class="wishes-grid">
+      <div class="wish-card">
+        <div class="wish-icon">🌸</div>
+        <h3 class="wish-card-title">Xinh Đẹp & Rạng Rỡ</h3>
+        <p class="wish-card-text">
+          Chúc em yêu bước sang tuổi mới luôn giữ được nụ cười tỏa nắng, xinh đẹp rạng ngời và luôn tràn đầy năng lượng tích cực mỗi sớm mai.
+        </p>
+      </div>
+
+      <div class="wish-card">
+        <div class="wish-icon">🌟</div>
+        <h3 class="wish-card-title">Vạn Sự Như Ý</h3>
+        <p class="wish-card-text">
+          Mong rằng mọi dự định, ước mơ và kế hoạch trong tương lai của em đều thuận buồm xuôi gió và gặt hái được những thành công rực rỡ nhất!
+        </p>
+      </div>
+
+      <div class="wish-card">
+        <div class="wish-icon">💖</div>
+        <h3 class="wish-card-title">Bình Yên & Hạnh Phúc</h3>
+        <p class="wish-card-text">
+          Chúc em mỗi ngày đều tìm thấy niềm vui trong những điều bình dị, luôn được yêu thương, chở che và có anh luôn kề bên.
+        </p>
+      </div>
+
+      <div class="wish-card">
+        <div class="wish-icon">🍀</div>
+        <h3 class="wish-card-title">+1000 May Mắn</h3>
+        <p class="wish-card-text">
+          Chúc cho tuổi mới của em yêu luôn gặp gỡ những điều kỳ diệu và bước đi trên con đường ngập tràn hoa hồng.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Special Wax-Sealed Letter -->
+  <section class="letter-section">
+    <div class="envelope-wrapper">
+      <div class="section-tag">SECRET LETTER</div>
+      <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 8px;">
+        Bức Thư Bí Mật Gửi Em Yêu
+      </h3>
+      <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
+        Nhấn vào con dấu sáp đỏ bên dưới để mở bức thư riêng anh dành cho em nhé!
+      </p>
+
+      <div class="wax-seal-btn" id="wax-seal-btn" title="Nhấn để phá niêm phong thư">
+        ❤️
+      </div>
+
+      <div class="letter-content" id="letter-content">
+        <div class="letter-header">Gửi Em Yêu của anh,</div>
+        <div class="letter-body">
+          <p>
+            Ngày 26 tháng 10 lại về, một ngày thật dịu dàng và đặc biệt bởi đó là ngày thế giới đón chào một cô gái dễ thương, ấm áp và luôn mang lại tiếng cười cho anh và mọi người xung quanh.
+          </p>
+          <p>
+            Tuổi mới đến mang theo bao điều mới mẻ và những chặng hành trình tuyệt vời. Chúc em yêu luôn giữ vững niềm tin vào chính mình, yêu thương bản thân thật nhiều và không ngừng theo đuổi những đam mê trong tim. Dù ngoài kia có những ngày giông bão hay thử thách, hãy nhớ rằng anh luôn ở đây bên cạnh, yêu thương và chở che cho em hết lòng.
+          </p>
+          <p>
+            Chúc cho tuổi mới của em yêu rực rỡ như hoa mùa xuân, trong trẻo như bầu trời thu và ngọt ngào như những viên kẹo ngọt!
+          </p>
+        </div>
+        <div class="letter-sign">
+          Happy Birthday Em Yêu Của Anh! 💖
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       MEMORY TIMELINE & GALLERY (KỶ NIỆM ĐÃ TRẢI QUA)
+       ========================================================================== -->
+  <section class="memory-timeline-section" id="memory-timeline-section">
+    <div class="section-heading">
+      <div class="section-tag">HÀNH TRÌNH THANH XUÂN</div>
+      <h2 class="section-title">Kỷ Niệm Đã Cùng Nhau Đi Qua</h2>
+      <p style="color: var(--text-secondary); max-width: 650px; margin: 10px auto 0; font-size: 1.05rem; line-height: 1.6;">
+        Từng khoảnh khắc, từng bức ảnh và những nụ cười rạng rỡ của <strong>em yêu</strong> được sắp xếp theo dòng thời gian yêu thương...
+      </p>
+    </div>
+
+      <!-- Timeline Tabs -->
+      <div class="timeline-nav-tabs">
+        <button class="timeline-tab-btn active" data-filter="all">🌸 Tất Cả Kỷ Niệm</button>
+        <button class="timeline-tab-btn" data-filter="spring2025">✨ Mùa Xuân 2025</button>
+        <button class="timeline-tab-btn" data-filter="summer2026">☀️ Mùa Hè Rực Rỡ 2026</button>
+        <button class="timeline-tab-btn" data-filter="bday2025">🎂 Sinh Nhật 2025</button>
+        <button class="timeline-tab-btn" data-filter="autumn2026">🍂 Mùa Thu 2026</button>
+        <button class="timeline-tab-btn vault-tab" data-filter="vault">🔒 Góc Riêng Tư</button>
+      </div>
+
+      <!-- Memory Cards Grid -->
+      <div class="memory-grid" id="memory-grid">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PRIVATE VAULT / GÓC NHẠY CẢM (MẬT KHẨU: 261017)
+         ========================================================================== -->
+    <section class="private-vault-section" id="private-vault-section">
+      <div class="vault-lock-icon" id="vault-lock-icon">🔒</div>
+      <div class="section-tag" style="color: #fda4af;">PRIVATE VAULT</div>
+      <h2 class="vault-title">Góc Kỷ Niệm Bí Mật</h2>
+      <p class="vault-subtitle">
+        Khoảnh khắc riêng tư đặc biệt dành riêng cho Minh Anh. Vui lòng nhập mật mã để mở khóa nhé!
+      </p>
+
+      <form class="vault-passcode-form" id="vault-form">
+        <div class="vault-input-wrap">
+          <input 
+            type="password" 
+            id="vault-passcode-input" 
+            class="vault-input" 
+            placeholder="Nhập mật mã..." 
+            maxlength="10" 
+            autocomplete="off"
+            required
+          >
+        </div>
+        <button type="submit" class="unlock-vault-btn" id="unlock-vault-btn">
+          <span>🗝️</span> Mở Khóa Bí Mật
+        </button>
+      </form>
+
+      <!-- Unlocked Photo Display -->
+      <div class="vault-unlocked-content" id="vault-unlocked-content">
+        <div class="vault-photo-frame" title="Bấm để xem ảnh phóng to toàn màn hình">
+          <img id="vault-sensitive-photo" src="gallery/sensitive/15A46FCD-EFBA-4280-A125-1E76AA981D00.jpg" alt="Khoảnh khắc riêng tư" loading="lazy">
+          <div class="vault-photo-caption">Khoảnh khắc đặc biệt chỉ riêng chúng mình ❤️</div>
+          <p style="color: #6b7280; font-size: 0.9rem; margin-top: 6px;">
+            (Nhấn vào ảnh để xem chế độ toàn màn hình chất lượng cao)
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Wish Sky Lanterns / Guestbook -->
+    <section class="wish-sky-section">
+      <div class="section-heading" style="margin-top: 0;">
+        <div class="section-tag">BẦU TRỜ ƯỚC NGUYỆN</div>
+        <h2 class="section-title">Gửi Lời Chúc Đến Em Yêu</h2>
+        <p style="color: var(--text-secondary); margin-top: 8px;">
+          Hãy thả một chiếc đèn trời mang theo lời chúc ngọt ngào nhất dành tặng em yêu nhé!
+        </p>
+      </div>
+
+      <form class="wish-input-form" id="wish-form">
+        <div class="input-row">
+          <input type="text" id="wish-sender-name" class="wish-input" placeholder="Tên của bạn (hoặc Biệt danh)..." style="flex: 1;" required>
+          <input type="text" id="wish-sender-text" class="wish-input" placeholder="Viết lời chúc ngọt ngào cho em yêu..." style="flex: 2;" required>
+        </div>
+        <button type="submit" class="send-wish-btn">
+          <span>🏮</span> Thả Đèn Ước Nguyện & Gửi Lời Chúc
+        </button>
+      </form>
+
+      <div class="wishes-board" id="wishes-board">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>Món quà sinh nhật đặc biệt dành riêng cho <strong>Võ Nguyễn Minh Anh</strong> (26/10)</p>
+      <p style="margin-top: 6px; font-size: 0.85rem;">Made with <span>♥</span> & magical stardust</p>
+    </footer>
+
+  </main>
+
+  <!-- ==========================================================================
+       SHARE MODAL
+       ========================================================================== -->
+  <div class="modal-backdrop" id="share-modal">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="close-share-modal">&times;</button>
+      <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: #fff; margin-bottom: 8px;">
+        Chia Sẻ Trang Web Sinh Nhật
+      </h3>
+      <p style="color: var(--text-secondary); font-size: 0.95rem;">
+        Gửi đường link này đến em yêu qua Zalo, Messenger hoặc quét mã QR dưới đây:
+      </p>
+
+      <div class="qr-code-box">
+        <img id="share-qr-img" src="" alt="QR Code Link Sinh Nhật">
+      </div>
+
+      <div class="share-input-group">
+        <input type="text" id="share-link-input" class="share-link-input" readonly>
+        <button class="copy-btn" id="copy-share-btn">Sao Chép</button>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.82rem;">
+        Mẹo: Bạn có thể thêm tham số <code>?name=Tên</code> để tùy biến tên người nhận!
+      </p>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FULLSCREEN LIGHTBOX MODAL
+       ========================================================================== -->
+  <div class="lightbox-modal" id="lightbox-modal">
+    <div class="lightbox-container">
+      <button class="lightbox-close" id="lightbox-close" title="Đóng">&times;</button>
+      <button class="lightbox-nav-btn lightbox-prev" id="lightbox-prev" title="Ảnh trước">&#10094;</button>
+      <div class="lightbox-media-wrapper" id="lightbox-media-wrapper">
+        <!-- Rendered dynamically -->
+      </div>
+      <button class="lightbox-nav-btn lightbox-next" id="lightbox-next" title="Ảnh kế tiếp">&#10095;</button>
+      <div class="lightbox-caption-bar">
+        <div class="lightbox-date" id="lightbox-date"></div>
+        <div class="lightbox-title" id="lightbox-title"></div>
+        <div class="lightbox-desc" id="lightbox-desc"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Message -->
+  <div class="toast-msg" id="toast-msg"></div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
