@@ -867,7 +867,7 @@ function setupPrivateVault() {
         title: 'Khoảnh Khắc Riêng Tư Của Chúng Mình ❤️',
         date: '02 Tháng 02, 2025',
         desc: 'Khoảnh khắc quý giá chỉ dành riêng cho hai ta.',
-        src: 'gallery/sensitive/15A46FCD-EFBA-4280-A125-1E76AA981D00.jpg',
+        src: 'gallery/sensitive/IMG_1553.jpg',
         type: 'image'
       });
     });
