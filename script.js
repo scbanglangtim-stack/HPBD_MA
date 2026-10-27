@@ -12,6 +12,128 @@ const audioPlayer = {
   toggle: () => {}
 };
 
+// --- 1. Site Entry Password Gate (Mật khẩu: 010723) ---
+const SITE_PASSWORD = '010723';
+
+function setupSiteLock() {
+  const lockOverlay = document.getElementById('site-lock-overlay');
+  const lockCard = document.getElementById('site-lock-card');
+  const lockForm = document.getElementById('site-lock-form');
+  const lockInput = document.getElementById('site-lock-input');
+  const lockToggle = document.getElementById('lock-toggle-pwd');
+  const lockError = document.getElementById('lock-error-msg');
+  const lockSubmitBtn = document.getElementById('site-lock-submit-btn');
+  const lockIcon = document.getElementById('lock-symbol-icon');
+  const lockIconBadge = document.getElementById('lock-icon-badge');
+  const relockBtn = document.getElementById('site-relock-btn');
+
+  if (!lockOverlay) return;
+
+  // Check session storage
+  if (sessionStorage.getItem('hpbd_site_unlocked') === 'true') {
+    lockOverlay.classList.add('unlocked');
+    lockOverlay.style.display = 'none';
+  } else {
+    lockOverlay.style.display = 'flex';
+    lockOverlay.classList.remove('unlocked');
+    setTimeout(() => {
+      if (lockInput) lockInput.focus();
+    }, 300);
+  }
+
+  // Toggle password visibility
+  if (lockToggle && lockInput) {
+    lockToggle.addEventListener('click', () => {
+      const isPwd = lockInput.type === 'password';
+      lockInput.type = isPwd ? 'text' : 'password';
+      lockToggle.textContent = isPwd ? '🙈' : '👁️';
+    });
+  }
+
+  // Handle unlock attempt
+  function attemptUnlock() {
+    if (!lockInput) return;
+    const entered = (lockInput.value || '').trim();
+
+    if (entered === SITE_PASSWORD) {
+      if (lockError) lockError.textContent = '';
+      lockInput.classList.remove('error');
+
+      if (lockIcon) lockIcon.textContent = '🔓';
+      if (lockIconBadge) lockIconBadge.classList.add('success');
+      if (lockSubmitBtn) {
+        lockSubmitBtn.classList.add('success');
+        lockSubmitBtn.innerHTML = '<span>✨</span> Mở Khóa Thành Công!';
+      }
+
+      sessionStorage.setItem('hpbd_site_unlocked', 'true');
+      
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 90,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
+      }
+
+      setTimeout(() => {
+        lockOverlay.classList.add('unlocked');
+        setTimeout(() => {
+          lockOverlay.style.display = 'none';
+        }, 600);
+      }, 500);
+
+    } else {
+      if (lockCard) {
+        lockCard.classList.remove('shake');
+        void lockCard.offsetWidth; // re-flow
+        lockCard.classList.add('shake');
+      }
+      lockInput.classList.add('error');
+      if (lockError) {
+        lockError.textContent = '❌ Mật khẩu chưa chính xác! Hãy thử lại nhé 💔';
+      }
+      setTimeout(() => {
+        lockInput.value = '';
+        lockInput.focus();
+      }, 500);
+    }
+  }
+
+  if (lockForm) {
+    lockForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      attemptUnlock();
+    });
+  }
+
+  // Allow re-locking from the top bar
+  if (relockBtn) {
+    relockBtn.addEventListener('click', () => {
+      sessionStorage.removeItem('hpbd_site_unlocked');
+      if (lockIcon) lockIcon.textContent = '🔒';
+      if (lockIconBadge) lockIconBadge.classList.remove('success');
+      if (lockSubmitBtn) {
+        lockSubmitBtn.classList.remove('success');
+        lockSubmitBtn.innerHTML = '<span>🗝️</span> Mở Khóa Trang Web';
+      }
+      if (lockInput) {
+        lockInput.value = '';
+        lockInput.classList.remove('error');
+      }
+      if (lockError) lockError.textContent = '';
+      lockOverlay.style.display = 'flex';
+      void lockOverlay.offsetWidth;
+      lockOverlay.classList.remove('unlocked');
+      setTimeout(() => {
+        if (lockInput) lockInput.focus();
+      }, 200);
+      if (typeof showToast === 'function') {
+        showToast('🔒 Đã khóa lại trang web!');
+      }
+    });
+  }
+}
 
 // --- 2. Canvas Starfield Background ---
 function initStarfield() {
@@ -372,6 +494,7 @@ function handleQueryParams() {
 
 // --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
+  setupSiteLock();
   initStarfield();
   setupGiftModal();
   createFloatingBalloons();
@@ -798,8 +921,8 @@ function prevLightbox() {
   openLightbox(currentLightboxIndex);
 }
 
-// --- 12. SENSITIVE PRIVATE VAULT (MẬT KHẨU: 261017) ---
-const VAULT_PASSWORD = '261017';
+// --- 12. SENSITIVE PRIVATE VAULT (MẬT KHẨU: 010723 / 261017) ---
+const VAULT_PASSWORDS = ['010723', '261017'];
 
 function setupPrivateVault() {
   const form = document.getElementById('vault-form');
@@ -836,7 +959,7 @@ function setupPrivateVault() {
       e.preventDefault();
       const entered = (passInput.value || '').trim();
 
-      if (entered === VAULT_PASSWORD) {
+      if (VAULT_PASSWORDS.includes(entered)) {
         sessionStorage.setItem('vault_unlocked', 'true');
         audioPlayer.playChimeFanfare();
         launchMassiveFireworks();

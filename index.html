@@ -39,6 +39,55 @@
     <button class="pill-btn" id="share-btn" title="Chia sẻ trang web">
       🔗 Chia Sẻ
     </button>
+    <button class="pill-btn icon-only" id="site-relock-btn" title="Khóa lại trang web">
+      🔒
+    </button>
+  </div>
+
+  <!-- ==========================================================================
+       STAGE -1: ENTRY PASSWORD GATE (MẬT KHẨU TRUY CẬP WEBSITE: 010723)
+       ========================================================================== -->
+  <div class="site-lock-overlay" id="site-lock-overlay">
+    <div class="lock-card" id="site-lock-card">
+      <div class="lock-glow-orb"></div>
+      <div class="lock-sparkles">✧ 💖 ✧</div>
+      <div class="lock-icon-wrapper" id="lock-icon-badge">
+        <span class="lock-symbol" id="lock-symbol-icon">🔒</span>
+      </div>
+      <div class="lock-tag">BẢO MẬT & RIÊNG TƯ</div>
+      <h1 class="lock-title">Happy Birthday Minh Anh ✨</h1>
+      <p class="lock-subtitle">
+        Trang web kỷ niệm này được bảo vệ bằng mật mã.<br>
+        Vui lòng nhập mật khẩu để mở khóa:
+      </p>
+
+      <form class="lock-form" id="site-lock-form" autocomplete="off">
+        <div class="lock-input-group">
+          <input 
+            type="password" 
+            id="site-lock-input" 
+            class="lock-input" 
+            placeholder="Nhập mật khẩu..." 
+            autocomplete="current-password"
+            maxlength="20"
+            required
+          >
+          <button type="button" class="lock-toggle-pwd" id="lock-toggle-pwd" title="Hiện/Ẩn mật mã">
+            👁️
+          </button>
+        </div>
+
+        <div class="lock-error-msg" id="lock-error-msg"></div>
+
+        <button type="submit" class="lock-submit-btn" id="site-lock-submit-btn">
+          <span>🗝️</span> Mở Khóa Trang Web
+        </button>
+      </form>
+
+      <div class="lock-hint">
+        💡 <span>Gợi ý:</span> Ngày kỷ niệm đặc biệt của chúng mình 💖
+      </div>
+    </div>
   </div>
 
   <!-- ==========================================================================
